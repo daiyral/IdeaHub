@@ -1,0 +1,35 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="{%static 'plan/register.css'%}" rel="stylesheet">
+</head>
+
+<body>
+<div class="messages">
+{%if message%}
+    <div>{{message}}</div>
+{%endif%}    
+</div>
+<form class="login-form" action="{%url 'register'%}" method="POST">
+{% csrf_token %}
+    <div class="login-form__logo-container">
+        <img class="login-form__logo" src="/media/plan/register_male_avatar.png" alt="Logo" >
+        <img class="login-form__logo" src="/media/plan/register_female_avatar.png" alt="Logo">
+    </div>
+    <div class="login-form__content">
+        <div class="login-form__header">Register an account</div>
+        <input class="login-form__input" type="text" name="username" placeholder="Username">
+        <input class="login-form__input" type="email" name="email" placeholder="Email Address">
+        <input class="login-form__input" type="password" name="password" placeholder="Password">
+        <input class="login-form__input" type="password" name="confirmation" placeholder="Confirm Password">
+        <button class="login-form__button" type="submit">Register</button>
+         <div class="login-form__links">
+            <a class="login-form__link" href="{%url 'login'%}">Already have an account?</a>
+        </div>
+    </div>
+</form>
+</body>
