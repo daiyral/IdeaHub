@@ -1,0 +1,622 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+/*general style*/
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#fff;
+    line-height: 1.7;
+    font-size:1rem;
+    min-height:200vh;
+}
+img{
+    height: auto;
+}
+li{
+  list-style:none;
+}
+
+/*navbar*/
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    transition:0.6s;
+    padding:40px 100px;
+    z-index: 10000;
+}
+header .logo{
+    position:relative;
+    color:#111;
+    font-weight:700;
+    text-decoration: none;
+    font-size:2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.6s;
+
+}
+header.sticky{
+    padding: 5px 100px;
+    background:#fff;
+    box-shadow: 0px 10px 14px -9px rgba(71,71,71,1);
+}
+
+header ul{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header  ul li{
+    position:relative;
+    list-style: none !important;
+}
+header ul li a{
+    position: relative;
+    margin: 0 15px;
+    text-decoration: none;
+    color:#111;
+    letter-spacing: 2px;
+    font-weight: 500px;
+    transition:0.6s;
+}
+.banner{
+    position: relative;
+    margin-top:50px;
+    width:100%;
+    height:100vh;
+    background-size: cover;
+}
+
+/*Home page*/
+p{
+    color:black;
+}
+.index_card{
+    margin-top:120px;
+    border:none;
+}
+.index_card_body{
+    margin-top:30px;
+}
+.index_card_title{
+    color:#009578;
+}
+.explain_card{
+  border:none;
+  font-size:1rem;
+  background-image:url("/media/plan/green_dust_scratch.png");
+  background-size:fill;
+}
+
+.btn {
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    background: #009578;
+    width: 100px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+}
+#index_btn{
+  width:150px;
+}
+
+.btn:hover {
+    background: #008067;
+}
+
+
+#howitworks,.index-stats,.register_card{
+  margin-top:100px;
+}
+.how_list{
+  text-align: left;
+}
+
+
+
+
+
+/* Profile container */
+
+  .profile {
+    margin: 150px 0;
+  }
+  
+  /* Profile sidebar */
+  .profile-sidebar {
+    padding: 20px 0 10px 0px;
+    background: #fff;
+  }
+  
+ 
+  
+  .profile-userpic img {
+    position:sticky;
+    float:none;
+    margin:0 auto;
+    height:300px;
+    width:300px;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+
+  }
+  
+  .profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .profile-usertitle-name {
+    color: #5a7391;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 7px;
+  }
+  .header{
+    color:#5a7391;
+  }
+  
+  .profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  
+  .profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+  }
+  
+  .profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+  }
+      
+  .profile-usermenu {
+    margin-top: 30px;
+  }
+  
+  .profile-usermenu ul li {
+    border-bottom: 1px solid #f0f4f7;
+  }
+  
+  .profile-usermenu ul li:last-child {
+    border-bottom: none;
+  }
+  
+  .profile-usermenu ul li a {
+    color: #93a3b5;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .profile-usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 16px;
+
+  }
+  
+  .profile-usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+    text-decoration: none !important;
+  }
+  
+  .profile-usermenu ul li.active {
+    border-bottom: none;
+  }
+  
+  .profile-usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px;
+  }
+  
+  /* Profile Content */
+  .profile-content {
+    white-space:none;
+    padding: 20px;
+    background: #fff;
+    min-height: 400px;
+    flex-wrap:wrap;
+  }
+  .profile_project{
+    display:none;
+    min-width:300px;
+    margin:10px;
+    height: 100%;
+  }
+  .profile_project img{
+    width:200px;
+    height:100%;
+  }
+  .profile_project p{
+    font-size:16px;
+  }
+  
+  @media (max-width:500px){
+    .profile_project{
+      text-align:center;  
+    }
+  }
+/*chat box*/
+
+#sample_msg span, #sample_msg img{
+  display:none;
+}
+
+.submit:hover{
+    opacity: 1;
+  }
+  
+.chat-popup{
+    text-align: center;
+    display: flex;
+    position: fixed;
+    bottom:150px;
+    right:400px;
+    height: 400px;
+    width: 300px;
+    background-color:#F5F5F5;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.75rem;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+    border-radius: 10px;
+    border:1px solid #FFFAFA;
+  }
+
+.chat-area{
+    height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+.income-msg{
+    display: flex;
+    align-items: center;
+  }
+  
+.avatar{
+    width:45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    display:inline-flex;
+  }
+
+.income-msg .msg{
+    background-color: dodgerblue;
+    color: white;
+    padding:0.5rem;
+    border-radius: 25px;
+    margin-left: 1rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.badge{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: red;
+    color:white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:-10px;
+    right: -10px;
+}
+  
+.input-area{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+input[type="text"]{
+    width:90%;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    border-radius: 5px;
+    height: 2.2rem;
+  }
+  
+.submit{
+    padding: 0.25rem 0.5rem;
+    margin-left: 0.5rem;
+    background-color: green;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    opacity: 0.7;
+  }
+  
+  
+.out-msg{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+.my-msg{
+    display:inline-flex;
+    justify-content: flex-end;
+    margin: 0.75rem;
+    padding: 0.5rem;
+    background-color: #ddd;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    word-break: break-all;
+
+  }
+  
+  
+@media (max-width:500px){
+  
+  .chat-popup{
+        bottom: 120px;
+        right:10%;
+        width: 80vw;
+  }
+}
+
+/*Project cards*/
+#projects{
+  padding:30px 0px;
+}
+#projects h3{
+  font: weight 900;
+  font-size:30px;
+  margin-top:100px;
+}
+.projects_title{
+   color:#009578;
+  text-align: center;
+  padding:25px 0px;
+}
+.projects_title p{
+  font-size:18px;
+}
+.card_projects_body{
+  width:100%;
+  box-shadow:0 0 20px 7px rgb(0,0,0,0.1);
+}
+.card_projects_body p{
+  font-size:16px;
+}
+.card_projects{
+  margin:20px 10px;
+  width:330px;
+  height:550px;
+}
+.card_projects_body a{
+  color:#0c7f90;
+  text-decoration:none;
+  font-size:15px;
+  margin-top:auto;
+  font-weight: 600px;
+}
+.card_projects_body a:hover{
+  color:#63a6b0;
+  text-decoration: none;
+}
+.inner{
+  overflow:hidden;
+}
+.inner img{
+  transition:all 1.5s ease;
+
+}
+.inner:hover img{
+  transform:scale(1.2);
+}
+#test{
+  width:100%;
+  height:400px;
+  object-fit: cover;
+}
+#project_btn{
+  width:150px;
+}
+
+/*Project page*/
+#project_img{
+  margin-top:50px;
+}
+.project_img{
+  min-height:300px;
+  height:100%;
+}
+.stats-content{
+  margin-top:50px;
+}
+.project-icons,.index-project-icons{
+  margin-bottom:10px;
+  color:#4169e1;
+}
+.index-project-icons{
+  color:#009578;
+}
+#looking_img{
+  min-width:350px;
+  width:80%;
+  height:100%;
+}
+.looking_card{
+  margin-top:0px;
+}
+.cantapply{
+  display:none;
+}
+
+
+/*team cards*/
+.team-heading::after,.need-heading::after,.index-need-heading::after{
+  content:"";
+  width:10rem;
+  height:.6rem;
+  background-color:#45e19f;
+  position: absolute;
+  margin-top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:2rem;
+}
+.need-heading::after{
+  background-color:#87CEEB ;
+}
+
+.team-card{
+  display: inline-block;
+  margin:40px 39px;
+  width:300px;
+  height:480px;
+  background-color:#F5F5F5;
+  display:flex;
+  box-shadow: .5rem .5rem 3rem rgba(0,0,0,0.2);
+
+}
+.team-card:hover{
+  transform:scale(1.1);
+}
+.team-card-img{
+  width:100%;
+  height:15rem;
+  object-fit:cover;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 63%);
+}
+.team-profile-img{
+  width:10rem;
+  height:10rem;
+  object-fit:cover;
+  border-radius: 50%;
+  z-index: 999;
+  border:.5rem solid #ebeef8;
+}
+.team-card-body{
+  margin-top:110px;
+}
+/*kanban board*/
+
+#task_btn{
+  float:right;
+}
+#board{
+  margin-top:150px;
+}
+.backlog,.todo,.review,.done{
+  background-color:#F5F5F5;
+  border-radius: 10px;
+  flex-wrap:wrap;
+  margin:10px;
+}
+
+.task-card{
+  margin:10px;
+}
+
+@keyframes hide{
+  0%{
+    opacity:1;
+    height:100%;
+    line-height:100%;
+  }
+  75%{
+    opacity:0;
+    height:100%;
+    line-height:100%;
+  }
+  100%{
+    opaicty:0;
+    height:0px;
+    line-height:0px;
+    padding:0px;
+    margim-bottom:0px;
+  }
+}
+
+#backlog-card{
+  background:#fff;
+  border-radius: 10px;
+  box-shadow:0px 10px 10px rgba(0,0,0,0.2);
+  display:flex;
+  max-width: 100%;
+  overflow: hidden;
+  width:400px;
+  height:130px;
+  margin:10px;
+  animation-name:hide;
+  animation-duration:5s;
+  animation-play-state:paused;
+
+}
+.box{
+  background:#e40046;
+  padding:30px;
+  min-width:100px;
+
+}
+.box p{
+  color:#fff;
+  
+}
+#backlog_img{
+  border-radius: 50%;
+  height:60px;
+  width:60px;
+
+}
+
+.listing{
+  cursor:move;
+}
+.drop-zone{
+  opacity:0.5
+}
+
+/*Create Project*/
+
+#creation{
+  margin-top:150px;
+  background-image:url("/media/plan/husk.png");
+  background-repeat:repeat;
+}
+@media (max-width:800px){ 
+  #creation{
+    background-image: none;
+  }
+}
+#project_form{
+  display:flex;
+  display:inline-block;
+  align-items: center;
+  width:50%;
+  min-width:300px;
+}

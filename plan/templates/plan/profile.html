@@ -1,0 +1,108 @@
+{%extends 'plan/layout.html'%}
+{% load static%}
+
+
+{%block body%}
+<div class="container profile-container">
+    <div class="row profile">
+		<div class="col-md-auto">
+			<div class="profile-sidebar">
+				<div class="profile-userpic">
+					<img src="{{profile.img.url}}" class="img-fluid" alt="">
+				</div>
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name">
+						{{profile.username}}
+					</div>
+					<div class="profile-usertitle-job">
+						{{profile.jobs}}
+					</div>
+				</div>
+				{%if profile.username != user.username%}
+				<div class="profile-userbuttons">
+					<button type="button" class="btn btn-success btn-sm" id="invite_btn">Invite</button>
+					<button type="button" class="btn btn-danger btn-sm" id="message_btn">Message</button>
+				</div>
+				{%else%}
+				<div class="profile-userbuttons">
+					<button type="button" class="btn btn-success btn-sm" id="">Messages</button>
+				</div>
+				{%endif%}
+				
+				<div class="profile-usermenu">
+					<ul class="fa-ul">
+						<li>
+							<a href="#" id="overview_link">
+							<i class="fa fa-home"></i>
+							Overview </a>
+						</li>
+						<li>
+							<a href="#" id="experience_link">
+							<i class="fas fa-user-graduate"></i>
+							Experience </a>
+						</li>
+						<li>
+							<a href="#" id="projects_link">
+							<i class="fas fa-project-diagram"></i>
+							Projects </a>
+						</li>
+						<li>
+							<a href="#" id="edit_link">
+							<i class="fas fa-cog"></i>
+							Edit </a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-auto">
+			<div class="card profile_project">
+				<div class="row">
+					<div class="col-md-4">
+						<img src="" class="img-fluid profile_project_img">
+					</div>
+					<div class="col-md-8">
+						<h5 class="card-title mt-2 profile_project_title"></h5>
+							<p class="card-text profile_project_text"></p>
+							<a href="" class="btn btn-primary profile_project_btn">Details</a>
+					</div>
+				</div>
+			</div>
+            <div class="profile-content">
+			<span><h3 class="header">Overview:</h3></span>
+			<p class="profile-info">
+		
+			   {%if profile.about%}
+					{{profile.about}}
+			   {%else%}
+					No info yet.
+			   {%endif%}
+			</p>   
+			</div>
+			
+			<div class="chat-popup">
+				<div class="badge">1</div>
+				<div class="chat-area">
+					<div class="income-msg">
+						<img src="{{viewer.img.url}}" class="avatar">
+						<span class="msg">HI test</span>
+					</div>
+					<ul class="out-msg">
+						
+					</ul>
+				</div>
+				<div class="input-area">
+					<input type="text" class='msg_input'>
+					<button class="submit"><i class="fas fa-paper-plane"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>   
+
+{%endblock%}
+
+{%block script%}
+	<script src="{%static 'plan/profile.js'%}"></script>
+	
+{%endblock%}

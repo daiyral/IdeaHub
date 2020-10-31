@@ -1,0 +1,26 @@
+{%extends "plan/layout.html"%}
+{%load static%}
+
+
+{%block body%}
+<section id="creation">
+<div class="card mb-3 text-center index_card">
+    <div class="row no-gutters">
+        <div class="col-md-6">
+            <div class="form-group">
+                <form action="{%url 'create_project'%}" method="POST" id="project_form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form}}
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="media/plan/create_background.png" class="img-fluid">
+        </div>
+    </div>
+</div>
+
+
+</section>
+{%endblock%}

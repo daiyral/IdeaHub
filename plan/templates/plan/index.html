@@ -1,0 +1,97 @@
+{%extends "plan/layout.html"%}
+{%load static%}
+
+{%block body%}
+
+<section class="banner">
+    <div class="card mb-3 text-center index_card"> 
+        <div class="row no-gutters">
+            <div class="col-md-6">
+                <img src="media/plan/idea_banner.png" class="img-fluid">
+            </div>
+            <div class="col-md-4">
+                <div class="card-body index_card_body">
+                    <div class="card-title index_card_title p-0"><h4>What is IdeaHub?</h4></div>
+                    <p class="card-text p-0">Ever had an idea you wanted to accomplish but couldn't do it alone?<br>
+                                         Use IdeaHub to find the perfect partners for your dream project.</p>
+                    <p class="card-text p-0 text-muted"><small>Use programming, biolgy, music and any creative outlet to build projects<small></small></p>
+                     {% if user.is_authenticated %}
+                     <div class="card-title index_card_title"><h4>Welcome {{user.username}}!</h4></div>
+                     <button type="button" class="btn btn-sucess" id="index_btn">Get Started</button>
+                     {%else%}
+                    <button type="button" class="btn btn-sucess">Login</button>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-3 text-center explain_card align-items-center" >
+        <div class="row no-gutters">
+            <div class="col-md-4" id="howitworks">
+                <div class="card-title index_card_title"><h4>How it works</h4></div>
+                    <p class="card-text p-0"><small class="text-muted">Start producing your dreams!</small>
+                        <ul class="fa-ul how_list">
+                            <li><span class="fa-li"><i class="fas fa-check-square fa-fw"></i></span>Sign up</li>
+                            <li><span class="fa-li"><i class="fas fa-check-square fa-fw"></i></span>Create or join a project</li>
+                            <li><span class="fa-li"><i class="fas fa-check-square fa-fw"></i></span>Connect with users via chat and set up your dream team</li>
+                            <li><span class="fa-li"><i class="fas fa-check-square fa-fw"></i></span>Manage your project with a Kanban board</li>
+                        </ul>
+                    </p>
+                    <button type="button" id="projects_btn" class="btn btn-primary">Projects</button>
+            </div>
+            <div class="col-md-8">
+                 <img src="media/plan/explaining_banner.png" id="explain_img" class="img-fluid">
+            </div>
+        </div>
+    </div>
+<div class="index-stats">    
+    <h3 class="text-center index-need-heading">Statistics</h3>
+    <div class="container">
+        <div class="row stats-content">
+            <div class="col-md-4 text-center">
+                <i class="fas fa-users fa-2x index-project-icons"></i>
+                <h1>{{user_count}}</h1>
+                <h6 class="text-muted">USERS</h6>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-project-diagram fa-2x index-project-icons"></i>
+                <h1>{{project_count}}</h1>
+                <h6 class="text-muted">PROJECTS</h6>
+            </div>
+            <div class="col-md-4 text-center">
+                <i class="fas fa-tasks fa-2x index-project-icons"></i>
+                <h1>{{task_count}} </h1>
+                <h6 class="text-muted">TASKS</h6>
+            </div>
+        </div>
+    </div>
+</div>  
+<div class="text-center">
+<img src="media/plan/stats_img.png" id="stats_img" class="img-fluid">
+</div>
+<div class="register_card">
+<div class="card mb-3 text-center explain_card"> 
+        <div class="row no-gutters">
+            <div class="col-md-6">
+                <img src="media/plan/sign_up.png" class="img-fluid">
+            </div>
+            <div class="col-md-4">
+                <div class="card-body index_card_body">
+                    <div class="card-title index_card_title  mt-5 p-0"><h4>Ready to start?</h4></div>
+                    <p class="card-text p-0">Register now to start working!</p>
+                     {% if user.is_authenticated %}
+                     <div class="card-title index_card_title"><h4>Welcome {{user.username}}!</h4></div>
+                     <button type="button" class="btn btn-sucess" id="index_btn">Get Started</button>
+                     {%else%}
+                    <button type="button" class="btn btn-sucess">Register</button>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+  
+   
+{%endblock%}

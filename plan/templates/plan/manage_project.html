@@ -1,0 +1,101 @@
+{%extends "plan/layout.html"%}
+{%load static%}
+
+{%block body%}
+<section id="board">
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="CreateTask" tabindex="-1" role="dialog" aria-labelledby="CreateTaskTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CreateTaskLongTitle">Create a task</h5>
+          <button type="button" id="closemodal" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="" id="task-form" method="POST">
+        {% csrf_token %}
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="task-title">Task Title</label>
+                    <input type="text" class="form-control" placeholder="Enter your tasks title..." id="task-title">
+                </div>
+                <div class="form-group">
+                    <label for="task-body">Task Body</label>
+                    <textarea name="post" id="task-body" class="form-control" placeholder="Enter your tasks details..." cols="20" rows="7"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="task-assigned">Assign a user to the task</label>
+                    <select class="form-control" id="task-assigned" name="task-assigned">
+                        {%for member in project.members.all %}
+                        <option>{{member}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="post_btn">Add</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="info">
+                <h3>{{project.name}}</h3>
+            </div>
+        </div>
+        <div class="col">
+                 <!-- Button trigger modal -->
+                <button type="button" id="task_btn" class="btn btn-primary" data-toggle="modal" data-target="#CreateTask">
+                    +
+                </button>
+        </div>
+    </div>
+<br><br>
+<li id="backlog-listing" draggable="true">
+    <div class="card" id="backlog-card">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <div class="box">
+                    <img src="" id="backlog_img">
+                    <p id="backlog_username"></p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <a href="#" id="delete-task"><i class="fas fa-backspace float-right"></i></a>
+                   <h5 class="card-title" id="backlog_title"></h5>
+                    <p class="card-text" id="backlog_body"> </p>
+                    <p class="text-muted text-right" id="backlog_timestamp"></p>
+                </div>
+            </div>
+        </div>
+    </div>    
+</li>
+<div class="container kanban">
+    <div class="row">
+        <div class="col todo lists">
+            <h3 class="col-title text-center">Todo</h3>
+            <ul class="todo-tasks"></ul>
+        </div>
+        <div class="col review lists">
+            <h3 class="col-title text-center">Review</h3>
+            <ul class="review-tasks"></ul>
+        </div>
+        <div class="col done lists">
+            <h3 class="col-title text-center">Done</h3>
+            <ul class="done-tasks"></ul>
+        </div>
+</div>
+</div>
+</section>
+{%endblock%}
+{%block script%}
+<script src="{%static 'plan/manage.js'%}"></script>
+
+{%endblock%}

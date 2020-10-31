@@ -1,0 +1,94 @@
+{%extends "plan/layout.html"%}
+{%load static%}
+
+{%block body%}
+<section id="project">
+<div class="card mb-3 text-center index_card"> 
+        <div class="row no-gutters">
+            <div class="col-md-6" id="project_img">
+                <img src="{{project.img.url}}" class="img-fluid project_img">
+            </div>
+            <div class="col-md-4">
+                <div class="card-body index_card_body">
+                    <div class="card-title index_card_title p-0"><h4>{{project.name}}</h4></div>
+                    <p class="card-text p-0 text-muted"><small>{{project.headline}}</small></p>
+                    <p class="card-text p-0">{{project.description}}<br></p>
+                    <a href="{%url 'manage' project.name%}"class="btn btn-primary">Manage</a>
+                </div>
+            </div>
+        </div>
+</div>
+<br><br><br>
+<h3 class="text-center need-heading">Statistics</h3>
+<div class="container">
+    <div class="row stats-content">
+        <div class="col-md-4 text-center">
+            <i class="fas fa-money-bill-wave fa-2x project-icons"></i>
+            <h1>{{project.budget}}$</h1>
+            <h6 class="text-muted">BUDGET</h6>
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="fas fa-users fa-2x project-icons"></i>
+            <h1>{{project.members.count}}</h1>
+            <h6 class="text-muted">MEMBERS</h6>
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="fas fa-clock fa-2x project-icons"></i>
+            <h1>{{project.est_length}} Weeks</h1>
+            <h6 class="text-muted">ESTIMATED LENGTH</h6>
+        </div>
+    </div>
+</div>
+<br><br><br>
+<div class="card mb-3 text-center index_card looking_card" >
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <div class="card-title index_card_title">
+                <br><br>
+                <h4>What we are looking for</h4>
+            </div>
+            {%for job in project.required.all %}
+            <ul class="looking_for">
+                <li><span><i class="fas fa-user-tie fa-fw"></i></span>{{job.name}}</li>
+            </ul>
+            
+            {%endfor%}                          
+            <button class="btn btn-primary" id="apply_btn"></button>
+            <div class="cantapply align-items-center justify-content-center">You are already a member of this project</div>
+         </div>
+            <div class="col-md-8">
+                <img src="/media/plan/project_hire_img.png" id="looking_img"  class="img-fluid">
+            </div>
+    </div>
+</div>
+<br><br><br>
+<h3 class="text-center team-heading">Meet the team</h3>
+<div class="container">
+    <div class="row">
+    {%for member in project.members.all %}
+        <div class="col-md-3.5">
+            <div class="card text-center team-card align-items-center">
+                <img src="/media/plan/card-background.png" class="team-card-img">
+                <div class="card-img-overlay team-card-body">
+                    <img class="card-img team-profile-img" src="{{member.img.url}}">
+                    {%if project.manager.username == member.username%}
+                        <h5 class="card-title">{{member.username}}<strong>(Lead)</strong></h5>
+                    {%else%}    
+                    <h5 class="card-title">{{member.username}}</h5>
+                    {%endif%}
+                    <p class="card-text profile-usertitle-job">{{member.jobs}}</p> 
+                    <p class="card-text">{{member.about}}</p>
+                    <button class="btn btn-primary">Contact</button>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+    </div>
+</div>
+
+</section>    
+{%endblock%}
+
+{%block script%}
+<script src="{%static 'plan/project.js'%}"></script>
+{%endblock%}

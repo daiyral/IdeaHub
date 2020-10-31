@@ -1,0 +1,36 @@
+{%extends "plan/layout.html"%}
+{%load static%}
+
+
+{%block body%}
+    <section id="projects">
+ 
+     <div class="container">
+         <div class="projects_title">
+             <h3>All Projects</h3>
+             <p class="text-muted">Find the perfect match for you</p>
+             <a href="{%url 'create_project'%}" class="btn btn-primary" id="project_btn">Create Project</a>
+         </div>
+         {%if projects%}
+         <div class="row">
+        {%for project in projects%}
+             <div class="col-md-4">
+                 <div class="card text-center card_projects align-items-center">
+                     <div class="inner embed-responsive">
+                        <img src="{{project.img.url}}" class="card-img-top img-responsive" id="test">
+                     </div>
+                     <div class="card-body card_projects_body">
+                         <h5 class="card-title card_projects_title">{{project.name}}</h5>
+                         <p>{{project.headline}}</p>
+                         <a href="{%url 'project' project.name %}">Check Project</a>
+                     </div>
+                 </div>
+             </div>
+        {%endfor%}     
+         </div>
+         {%else%}
+         <h1>No projects</h1>
+         {%endif%}
+     </div>
+    </section>
+{%endblock%}
