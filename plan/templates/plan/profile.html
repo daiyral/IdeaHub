@@ -20,12 +20,13 @@
 				</div>
 				{%if profile.username != user.username%}
 				<div class="profile-userbuttons">
-					<button type="button" class="btn btn-success btn-sm" id="invite_btn">Invite</button>
-					<button type="button" class="btn btn-danger btn-sm" id="message_btn">Message</button>
+				  <!-- Button trigger modals -->
+					<button type="button" class="btn btn-success btn-sm" id="invite_btn" data-toggle="modal" data-target="#Invite">Invite</button>
+					<button type="button" class="btn btn-danger btn-sm" id="message_btn" data-toggle="modal" data-target="#Message">Message</button>
 				</div>
 				{%else%}
 				<div class="profile-userbuttons">
-					<button type="button" class="btn btn-success btn-sm" id="">Messages</button>
+					<button type="button" class="btn btn-success btn-sm" id="my_messages">Messages</button>
 				</div>
 				{%endif%}
 				
@@ -69,37 +70,71 @@
 				</div>
 			</div>
             <div class="profile-content">
-			<span><h3 class="header">Overview:</h3></span>
-			<p class="profile-info">
-		
-			   {%if profile.about%}
-					{{profile.about}}
-			   {%else%}
-					No info yet.
-			   {%endif%}
-			</p>   
-			</div>
+				<span><h3 class="header">Overview:</h3></span>
+				<p class="profile-info">
 			
-			<div class="chat-popup">
-				<div class="badge">1</div>
-				<div class="chat-area">
-					<div class="income-msg">
-						<img src="{{viewer.img.url}}" class="avatar">
-						<span class="msg">HI test</span>
-					</div>
-					<ul class="out-msg">
-						
-					</ul>
-				</div>
-				<div class="input-area">
-					<input type="text" class='msg_input'>
-					<button class="submit"><i class="fas fa-paper-plane"></i></button>
-				</div>
+				{%if profile.about%}
+						{{profile.about}}
+				{%else%}
+						No info yet.
+				{%endif%}
+				</p>   
 			</div>
 		</div>
 	</div>
 </div>   
 
+  <!-- Modal message -->
+  <div class="modal fade" id="Message" tabindex="-1" role="dialog" aria-labelledby="MessageTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="CreateMessageLongTitle">Message {{profile.username}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{%url 'send_message' profile.username%}"method="POST">
+        {% csrf_token %}
+            <div class="modal-body">
+                <textarea name="message" id="message_body" class="form-control" cols="20" rows="7"></textarea>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="send_btn">Send</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+   <!-- Modal Invite -->
+<div class="modal fade" id="Invite" tabindex="-1" role="dialog" aria-labelledby="InviteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="InviteLongTitle">Invite</h5>
+          <button type="button" id="closemodal" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="" id="invite_form"method="POST">
+        {% csrf_token %}
+		<div class="modal-body">
+          <label for="invite-assigned">Invite {{profile.username}} to join:</label>
+            <select class="form-control" id="invite-assigned" name="invite-assigned">
+                {%for project in project_managed %}
+                    <option>{{project}}</option>
+                {%endfor%}
+            </select>
+		</div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="invite_btn">Invite</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 {%endblock%}
 
 {%block script%}

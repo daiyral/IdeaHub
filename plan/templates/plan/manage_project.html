@@ -49,6 +49,9 @@
                 <h3>{{project.name}}</h3>
             </div>
         </div>
+        <div class="col text-center trash-col">
+            <i class="fas fa-trash-alt" id="trash"></i>
+        </div>
         <div class="col">
                  <!-- Button trigger modal -->
                 <button type="button" id="task_btn" class="btn btn-primary" data-toggle="modal" data-target="#CreateTask">
@@ -60,25 +63,24 @@
 <li id="backlog-listing" draggable="true">
     <div class="card" id="backlog-card">
         <div class="row">
-            <div class="col-md-4 text-center">
+            <div class="col-md-2 text-center">
                 <div class="box">
                     <img src="" id="backlog_img">
                     <p id="backlog_username"></p>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card-body">
-                    <a href="#" id="delete-task"><i class="fas fa-backspace float-right"></i></a>
                    <h5 class="card-title" id="backlog_title"></h5>
                     <p class="card-text" id="backlog_body"> </p>
-                    <p class="text-muted text-right" id="backlog_timestamp"></p>
+                    <p class="card-text text-muted text-right" id="backlog_timestamp"></p>
                 </div>
             </div>
         </div>
     </div>    
 </li>
 <div class="container kanban">
-    <div class="row">
+    <div class="row ">
         <div class="col todo lists">
             <h3 class="col-title text-center">Todo</h3>
             <ul class="todo-tasks"></ul>

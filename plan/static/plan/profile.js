@@ -5,13 +5,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     
     if(document.querySelector('#invite_btn')!=null){
 
-        document.querySelector('#invite_btn').onclick=()=>{
-            return invite(username)
+        document.querySelector('#invite_form').onsubmit=()=>{
+            document.getElementById('closemodal').click();
+            invite(username)
+            return false;
         }
     
-        document.querySelector('#message_btn').onclick=()=>{
-            return message(username)
-        }
     }
     document.querySelector('#overview_link').onclick=()=>{
         return overview(username)
@@ -26,37 +25,24 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
 })
 function invite(username){
+    
+    const project_invite=document.querySelector('#invite-assigned');
 
+    fetch(`/invite/${username}`,{
+        method:'POST',
+        body:JSON.stringify({
+            invite:`${project_invite.value}`
+        })
+    })
+    .then(response=>response.json())
+    .then(answer =>{
+        console.log(answer)
+
+            
+    })
     
 }
-function message(username){
-    const chat=document.querySelector('.chat-popup');
-    chat.style.display='flex';
 
-    const submit=document.querySelector('.submit');
-    const input=document.querySelector('.msg_input');
-
-    submit.addEventListener('click',()=>{
-       fetch(`/info/${username}/user_info`)
-       .then(response=>response.json())
-       .then(user=>{
-           console.log(user);
-          var new_msg=document.createElement('li');
-           var user_img=document.createElement('img');
-           user_img.src=user.img;
-           user_img.className="avatar";
-           var user_msg=document.createElement('span');
-           user_msg.className="my-msg";
-           var msg_text=document.createTextNode(`${input.value}`);
-           user_msg.appendChild(msg_text);
-           new_msg.appendChild(user_img);
-           new_msg.appendChild(user_msg);
-           chat.querySelector('.out-msg').appendChild(new_msg);
-           input.value='';
-       })
-    })
-
-}
 function overview(username){
     
     var info=document.querySelector('.profile-info');

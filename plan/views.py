@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import User,Project,Task,Tag
+from .models import User,Project,Task,Tag,Message
 from .forms import ProjectForm
 # Create your views here.
 
@@ -81,9 +81,11 @@ def register(request):
 
 def profile(request,name):
     user=User.objects.get(username__iexact=name)
+    project_managed=Project.objects.filter(manager__username=request.user)
     return render(request,"plan/profile.html",{
         "profile":user,
-        "viewer":request.user
+        "viewer":request.user,
+        "project_managed":project_managed
 
     })
 
@@ -122,6 +124,7 @@ def create_project(request):
             instance=form.save(commit=False)
             instance.save()
             instance.members.add(request.user)
+            instance.manager=request.user
             required=form.cleaned_data['required']
             instance.required.set(required)
             instance.save()
@@ -184,24 +187,53 @@ def tasks(request,project_name):
          return JsonResponse({"Error":"Method must be POST or GET"},status=401)       
 
 @csrf_exempt#not secure
-def update_task(request,task_id):
-
+def update_task(request,task_id,project_name):
     if request.method=="POST":
-        task=Task.objects.get(pk=task_id)
-        data=json.loads(request.body)
-        col=data.get("col","")
-        task.col=Tag.objects.get(name=col)
-        task.save()
-        return JsonResponse({"Success":"Updated col"})
+        project=Project.objects.get(name=project_name)
+        if project.members.filter(username=request.user).exists():
+            task=Task.objects.get(pk=task_id)
+            data=json.loads(request.body)
+            col=data.get("col","")
+            task.col=Tag.objects.get(name=col)
+            task.save()
+            return JsonResponse({"Success":"Updated col"})
+        else:
+            return JsonResponse({"Error":"Cannot move tasks in other projects"})    
 
 @csrf_exempt#not secure
-def delete_task(request,task_id):
-
+def delete_task(request,task_id,project_name):
     if request.method=="POST":
         try:
             task=Task.objects.get(pk=task_id)
         except Task.DoesNotExist:
             return HttpResponse('Task does not exist')
-    task.delete()
-    return JsonResponse({"Success":"Deleted task"})     
+        project=Project.objects.get(name=project_name)
+        if project.members.filter(username=request.user).exists():        
+            task.delete()
+            return JsonResponse({"Success":"Deleted task"})   
+        else:
+            return JsonResponse({"Error":"Cannot delete tasks in other projects"})
 
+def send_message(request,recipient):
+    if request.method=="POST":
+        message=request.POST["message"]
+        message_reciver=User.objects.get(username=recipient)
+        message_sender=User.objects.get(username=request.user)
+        message=Message(
+            author=message_sender,
+            recipient=message_reciver,
+            content=message
+        )
+        message.save()
+        return HttpResponseRedirect(reverse('profile',args=[recipient]))
+@csrf_exempt
+def invite(request,username):
+    if request.method=="POST":
+        user=User.objects.get(username=username)
+        data=json.loads(request.body)
+        project_invite=data.get("invite","")
+        project=Project.objects.get(name=project_invite)
+        if project.members.filter(username=username).exists():
+            return JsonResponse([0],safe=False) 
+        user.invites.add(project)
+        return JsonResponse([1],safe=False)

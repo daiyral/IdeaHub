@@ -8,12 +8,33 @@ document.addEventListener('DOMContentLoaded',()=>{
     const lists=document.querySelectorAll('.lists');//all lists
     document.querySelector('#backlog-listing').style.display='none';
 
+    const trash_area=document.querySelector('.trash-col');
+    trash_area.addEventListener('dragover',e=>{
+        e.preventDefault();
+    })
+    trash_area.addEventListener("drop",e=>{
+        e.preventDefault();
+        const dropped_id=e.dataTransfer.getData("text/plain");
+        const dropped=document.getElementById(`${dropped_id}`);
+        dropped.style.display='none';
+        fetch(`/delete_task/${dropped_id}/${project_name}`,{
+            method:"POST"
+        })
+        .then(response=>response.json())
+        .then(answer=>{
+            console.log(answer)
+
+        })
+        document.getElementById('trash').style.display='none';
+    })
+
     lists.forEach(list=>{
         list.addEventListener("dragover",e=>{
             e.preventDefault();
         })
         list.addEventListener("drop",e=>{
             e.preventDefault();
+            document.getElementById('trash').style.display='none';
             const dropped_id=e.dataTransfer.getData("text/plain");
             const dropped=document.getElementById(`${dropped_id}`);
             const box= dropped.querySelector('.box');
@@ -25,7 +46,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                 box.style.background='#32CD32';
             else
                 box.style.background='#e40046';    
-            fetch(`/update_task/${dropped_id}`,{
+            fetch(`/update_task/${dropped_id}/${project_name}`,{
                 method:"POST",
                 body:JSON.stringify({
                     col:`${list_name}`
@@ -45,7 +66,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         document.getElementById('task-body').value="";
         return false;
     }
-    
+
 })
 
 function load_tasks(project_name){
@@ -88,6 +109,8 @@ function add_task(project_name){
 
 function create_task_cards(task)
 {
+    var project_name=window.location.pathname;
+    project_name=project_name.substring(project_name.lastIndexOf('/')+1);
     var new_task=document.querySelector('#backlog-listing').cloneNode(true);
     var initials= task.assigned_first_name[0].toUpperCase()+task.assigned_last_name[0].toUpperCase();
     new_task.id=`${task['id']}`;
@@ -98,19 +121,11 @@ function create_task_cards(task)
     new_task.querySelector('#backlog_username').innerHTML=`${initials}`;
     new_task.querySelector('#backlog_timestamp').innerHTML=`${task['timestamp']}`
     new_task.style.display='inline-block';
-    new_task.querySelector('#delete-task').onclick=()=>{
-        fetch(`/delete_task/${task['id']}`,{
-            method:"POST"
-        })
-        .then(response=>response.json())
-        .then(result=>{
-            console.log(result)
-            new_task.style.animationPlayState="running";
-            //new_task.remove();
-            })
-    }
+   
+
     new_task.addEventListener('dragstart',e=>{
         e.dataTransfer.setData("text/plain",new_task.id)
+        document.getElementById('trash').style.display='block';
     })
     const list=document.querySelector(`.${task['col']}-tasks`);
     if(task['col'] == 'review')
